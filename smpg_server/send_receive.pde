@@ -9,8 +9,8 @@ void send() {
   if(clientB!=null) myServer.write("<YposB=" + clientB.ypos + ">");
   else myServer.write("<YposB=" + -50 + ">");
   
-  myServer.write("<YposC=" + int(ball.ypos) + ">");
-  myServer.write("<XposC=" + int(ball.xpos) + ">");
+  myServer.write("<YposC=" + int(ball.pos.y) + ">");
+  myServer.write("<XposC=" + int(ball.pos.x) + ">");
   myServer.write("<PointsA=" + pointsA + ">");
   myServer.write("<PointsB=" + pointsB + ">");
 }
@@ -26,8 +26,15 @@ void checkIncomingMail(){
     if(whateveritsaid != null) {
         for(PongClient pC : pongClients) {
           if(next_client == pC.client) {
-    
+            
            if(whateveritsaid.contains("PONG")) pC.lastping = millis() - (timer+8);
+           
+           if(whateveritsaid.contains("NAME")) {
+             pC.name = whateveritsaid.substring(5, whateveritsaid.length());
+             if(findPongClient('A') != null) myServer.write("<NAMEA=" + findPongClient('A').name + ">");
+             if(findPongClient('B') != null) myServer.write("<NAMEB=" + findPongClient('B').name + ">");
+           }
+
            else if(whateveritsaid.charAt(0) == 'U' && whateveritsaid.length()  >= 10) {
                if(whateveritsaid.charAt(3) == '1') pC.up = true;
                else pC.up = false;

@@ -16,8 +16,15 @@ void keyPressed() {
   else if(key=='a') clientA_cheatmode = !clientA_cheatmode;
   else if(key=='b') clientB_cheatmode = !clientB_cheatmode;
   else if(key=='p') pause = !pause;
+  else if(key=='d') debugmode = !debugmode;
 }
 
+
+void mousePressed() {
+  for(Button button : buttons) {
+    button.mouseAction();
+  }
+}
 
 void game() {
   if(!pause) {
@@ -27,17 +34,17 @@ void game() {
   
     ball.move();
   
-    if(ball.xpos < 0 && clientA_cheatmode) {ball.xvel=-ball.xvel;}
-    else if(ball.xpos < 0) {pointsB++; ball.reset_vars();}
+    if(ball.pos.x < 0 && clientA_cheatmode) {ball.vel.x=-ball.vel.x;}
+    else if(ball.pos.x < 0) {pointsB++; ball.reset_vars();}
   
-    if(ball.xpos > width && clientB_cheatmode) { ball.xvel=-ball.xvel;}
-    else if (ball.xpos > width) {pointsA++; ball.reset_vars();}
+    if(ball.pos.x > table_width && clientB_cheatmode) { ball.vel.x=-ball.vel.x;}
+    else if (ball.pos.x > table_width) {pointsA++; ball.reset_vars();}
   
     do {
-      if(ball.ypos > height) ball.yvel = random(0.5, 1.5) * -ball.yvel;
-      if(ball.ypos < 0) ball.yvel = random(0.5, 1.5) * -ball.yvel;
-      if(abs(ball.yvel) < 0.2) ball.yvel *= 2;
-    } while (abs(ball.yvel) < 0.2);
+      if(ball.pos.y > table_height) ball.vel.y = random(0.5, 1.5) * -ball.vel.y;
+      if(ball.pos.y < 0) ball.vel.y = random(0.5, 1.5) * -ball.vel.y;
+      if(abs(ball.vel.y) < 0.2) ball.vel.y *= 2;
+    } while (abs(ball.vel.y) < 0.2);
   }
 }
 
@@ -50,24 +57,76 @@ void giveScreenInfo() {
   background(0);
   noFill();
   stroke(90, 90, 90);
-  line(width/2, 0, width/2, height);
-  ellipse(width/2, height/2, 30, 30);
+  strokeWeight(2);
+  line(table_width/2, 0, table_width/2, table_height);
+  line(0, table_height, table_width, table_height);
+  ellipse(table_width/2, table_height/2, 30, 30);
+
   
   fill(255);  
   stroke(255);  
 
-  if(clientA!=null) {line(50, clientA.ypos+25, 50, clientA.ypos-25); text(clientA.client.toString() + " - A", 60, clientA.ypos); text(clientA.client.ip(), 60, clientA.ypos+12); text("Ping = " + clientA.lastping, 65, clientA.ypos+24);}
-  if(clientB!=null) {line(width-50, clientB.ypos+25, width-50, clientB.ypos-25); text(clientB.client.toString() + " - B", width-250, clientB.ypos); text(clientB.client.ip(), width-250, clientB.ypos+12); text("Ping = " + clientB.lastping, width-245, clientB.ypos+24);}
+  if(clientA!=null) {
+    text(clientA.name, width/4, 12);
+    line(50, clientA.ypos+25, 50, clientA.ypos-25);
+    if(debugmode) {
+      textAlign(LEFT);
+      text(clientA.client.toString() + " - A", 60, clientA.ypos); 
+      text(clientA.client.ip(), 60, clientA.ypos+12); 
+      text("Ping = " + clientA.lastping, 65, clientA.ypos+24);
+      textAlign(CENTER);
+    }
+    
 
-  text(pointsA + " : " + pointsB, width/2, 20);
-  ellipse(ball.xpos, ball.ypos, 5, 5);
+  }
   
-  text("ServerIP: " + Server.ip(), 150, height/2+50);
-  text("Port ID: " + PORT_ID, 150, height/2+62);
-  text("Ball X: " + int(ball.xpos), width/2+30, height/2+50);
-  text("Ball Y: " + int(ball.ypos), width/2+30, height/2+62);
-  text("Ball VEL: X:" + float(round(ball.xvel*100)) / 100 + " Y:" + float(round(ball.yvel*100)) / 100, width/2+30, height/2+74);
+  if(clientB!=null) {
+  line(table_width-50, clientB.ypos+25, table_width-50, clientB.ypos-25);
+  text(clientB.name, 3*width/4, 12);
+  if(debugmode) {
+    textAlign(RIGHT);
+    text(clientB.client.toString() + " - B", table_width-60, clientB.ypos);
+    text(clientB.client.ip(), table_width-60, clientB.ypos+12);
+    text("Ping = " + clientB.lastping, table_width-60, clientB.ypos+24);
+    textAlign(CENTER);
+  }
+
+}
   
-  if(clientA_cheatmode) text("A is cheating!", 150, height/2+86);
-  if(clientB_cheatmode) text("B is cheating!", 150, height/2+98);
+  strokeWeight(1);
+  textSize(15);
+  text(pointsA, table_width/2 - 40, 20);
+  text(pointsB,  table_width/2 + 40, 20);
+  ellipse(ball.pos.x, ball.pos.y, 5, 5);
+  textSize(12);
+  
+
+
+  text("ServerIP: " + Server.ip(), table_width/4, table_height-7);
+  text("Port ID: " + PORT_ID, 3*table_width/4, table_height-7);
+  
+  if(clientA_cheatmode) text("A is cheating!", 150, table_height/2+86);
+  if(clientB_cheatmode) text("B is cheating!", 150, table_height/2+98);
+  
+  if(debugmode) {
+  textAlign(RIGHT);
+  text("Ball X: " + int(ball.pos.x), table_width/2-5, table_height/2+50);
+  text("Ball Y: " + int(ball.pos.y), table_width/2-5, table_height/2+62);
+  textAlign(LEFT);
+  text("VX:" + float(round(ball.vel.x*100)) / 100, table_width/2+5, table_height/2+50);
+  text("VY:" + float(round(ball.vel.y*100)) / 100, table_width/2+5, table_height/2+62);
+  textAlign(CENTER);
+  }
+  
+
+  
+  for(Button button : buttons) {
+    button.draw();
+    if(button.switched_on) {
+      key = button.my_key;
+      button.switched_on = !button.switched_on;
+      keyPressed();
+    }
+  }
+  
 }

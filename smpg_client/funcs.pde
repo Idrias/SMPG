@@ -21,6 +21,9 @@ void clientEvent(Client receiver) {
 
 
 void update_vars() {
+  if(msg.contains("NAMEA") && !msg.contains(PLAYERNAME)) {playerB = msg.substring(6, msg.length()); oppopos='l';}
+  if(msg.contains("NAMEB") && !msg.contains(PLAYERNAME)) {playerB = msg.substring(6, msg.length()); oppopos='r';}
+  
   // Rausfinden, wo sich der auszulesende Wert befindet und diesen in "number" speichern!
   int index_equals = msg.indexOf("=");
   int number = int(msg.substring(index_equals+1, msg.length()));
@@ -30,7 +33,7 @@ void update_vars() {
   else if(msg.contains("YposB")) YposB = number;
   else if(msg.contains("YposC")) YposC = number;
   else if(msg.contains("XposC")) XposC = number;
-  else if(msg.contains("PointsA")) PointsA = number;
-  else if(msg.contains("PointsB")) PointsB = number;
+  else if(msg.contains("PointsA")) pointsA = number;
+  else if(msg.contains("PointsB")) pointsB = number;
   else if(msg.contains("PING")) myClient.write("PONG");
 }

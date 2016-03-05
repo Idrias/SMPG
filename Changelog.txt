@@ -19,6 +19,16 @@ S:::::::::::::::SS M::::::M               M::::::MP::::::::P               GGG::
 
 
 --- /// --- /// ---
+Version 1.2:
+	- Server GUI 
+	- ability to choose a playername 
+
+	- Same strokeStrength on Server and Client 
+	- Better Scoreboard, better text display on Server 
+	- toggle Server debug information 
+	- Server: switch classes to PVector instead of int x, int y 
+	- include ball / paddle collision method in ball class 
+--- /// --- /// ---
 Version 1.1:
 	- pause game
 	- show player ping
