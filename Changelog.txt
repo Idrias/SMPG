@@ -1,0 +1,29 @@
+                                                                                           
+                                                                                           
+   SSSSSSSSSSSSSSS MMMMMMMM               MMMMMMMMPPPPPPPPPPPPPPPPP           GGGGGGGGGGGGG
+ SS:::::::::::::::SM:::::::M             M:::::::MP::::::::::::::::P       GGG::::::::::::G
+S:::::SSSSSS::::::SM::::::::M           M::::::::MP::::::PPPPPP:::::P    GG:::::::::::::::G
+S:::::S     SSSSSSSM:::::::::M         M:::::::::MPP:::::P     P:::::P  G:::::GGGGGGGG::::G
+S:::::S            M::::::::::M       M::::::::::M  P::::P     P:::::P G:::::G       GGGGGG
+S:::::S            M:::::::::::M     M:::::::::::M  P::::P     P:::::PG:::::G              
+ S::::SSSS         M:::::::M::::M   M::::M:::::::M  P::::PPPPPP:::::P G:::::G              
+  SS::::::SSSSS    M::::::M M::::M M::::M M::::::M  P:::::::::::::PP  G:::::G    GGGGGGGGGG
+    SSS::::::::SS  M::::::M  M::::M::::M  M::::::M  P::::PPPPPPPPP    G:::::G    G::::::::G
+       SSSSSS::::S M::::::M   M:::::::M   M::::::M  P::::P            G:::::G    GGGGG::::G
+            S:::::SM::::::M    M:::::M    M::::::M  P::::P            G:::::G        G::::G
+            S:::::SM::::::M     MMMMM     M::::::M  P::::P             G:::::G       G::::G
+SSSSSSS     S:::::SM::::::M               M::::::MPP::::::PP            G:::::GGGGGGGG::::G
+S::::::SSSSSS:::::SM::::::M               M::::::MP::::::::P             GG:::::::::::::::G
+S:::::::::::::::SS M::::::M               M::::::MP::::::::P               GGG::::::GGG:::G
+ SSSSSSSSSSSSSSS   MMMMMMMM               MMMMMMMMPPPPPPPPPP                  GGGGGG   GGGG
+
+
+--- /// --- /// ---
+Version 1.1:
+	- pause game
+	- show player ping
+	- dont show player cheat on/off next to paddle
+	- (finished VPN testing: it works!)
+--- /// --- /// ---
+Version 1.0: 
+	- Release
