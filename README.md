@@ -17,7 +17,7 @@ HowTo:
       - Host is in different network, VPN: Enter virtual IP of host
   
 - You can also change the name of each player in the client files
-- Have fun! Control the game with w + s on clientside, use gui buttons to control serverside. 
+- Have fun! Control the game with w + s on clientside, use gui buttons or keyboard to control serverside. 
 
 
 Don't do anything evil with this program. I'm not responsible for any damage etc.
